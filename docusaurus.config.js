@@ -35,7 +35,7 @@ const config = {
           postsPerPage: 7,
           archiveBasePath: "/archive",
           feedOptions: {
-            type: 'rss',
+            type: 'all',
             createFeedItems: async (params) => {
               const {blogPosts, defaultCreateFeedItems, ...rest} = params;
               return defaultCreateFeedItems({
