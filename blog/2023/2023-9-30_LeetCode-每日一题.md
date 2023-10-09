@@ -15,7 +15,7 @@ tags: [2023, LeetCode, 每日一题]
 | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- |
 |            |            |            |            |            |            | **[10.1]** |
 | **[10.2]** | **[10.3]** | **[10.4]** | **[10.5]** | **[10.6]** | **[10.7]** | **[10.8]** |
-| 9          | 10         | 11         | 12         | 13         | 14         | 15         |
+| **[10.9]** | 10         | 11         | 12         | 13         | 14         | 15         |
 | 16         | 17         | 18         | 19         | 20         | 21         | 22         |
 | 23         | 24         | 25         | 26         | 27         | 28         | 29         |
 
@@ -517,5 +517,38 @@ func (h hp) Less(i, j int) bool  { return h[i].price < h[j].price }
 func (h hp) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }
 func (h *hp) Push(v interface{}) { *h = append(*h, v.(pair)) }
 func (h *hp) Pop() interface{}   { a := *h; v := a[len(a)-1]; *h = a[:len(a)-1]; return v }
+```
+
+
+
+## 10.9｜[2578. 最小和分割](https://leetcode.cn/problems/split-with-minimum-sum/)
+
+**思路**
+
+将给定的 num 变成数组，然后进行排序。从个位开始，依次分配最大的数。
+
+**代码实现**
+
+```go
+func splitNum(num int) int {
+    var temp []int
+    for num != 0{
+        temp = append(temp, num % 10)
+        num /= 10
+    }
+
+    var power = 1
+    var ans int
+    var n = len(temp)
+    
+    sort.Ints(temp)
+    for i := n - 1; i >= 0; i--{
+        ans += temp[i] * power
+        if (n - i - 1) % 2 == 1{
+            power *= 10
+        }
+    }
+    return ans
+}
 ```
 
