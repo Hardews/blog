@@ -6,15 +6,16 @@ SOURCE_PATH= '/opt/blog'
 CID=$(docker ps | grep "$SERVER_NAME" | awk '{print $1}')
 # 镜像 id
 IID=$(docker images | grep "$SERVER_NAME" | awk '{print $3}')
+# 构建 docker 镜像
+docker build -t $SERVER_NAME .
+cd
+# 先构建，再更新。
 # 如果有该容器
 if [ -n "$CID" ]; then
   echo "存在容器 $SERVER_NAME, CID-$CID"
   docker stop $SERVER_NAME
   docker rm $SERVER_NAME
 fi
-# 构建 docker 镜像
-docker build -t $SERVER_NAME .
-cd
 # 运行 docker 容器
 docker run --name $SERVER_NAME -d -p 3000:80 $SERVER_NAME
 echo "$SERVER_NAME 运行成功"
