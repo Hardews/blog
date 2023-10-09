@@ -14,7 +14,7 @@ tags: [2023, LeetCode, 每日一题]
 | 一         | 二         | 三         | 四         | 五         | 六         | 七         |
 | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- |
 |            |            |            |            |            |            | **[10.1]** |
-| **[10.2]** | **[10.3]** | **[10.4]** | **[10.5]** | **[10.6]** | **[10.7]** | 8          |
+| **[10.2]** | **[10.3]** | **[10.4]** | **[10.5]** | **[10.6]** | **[10.7]** | **[10.8]** |
 | 9          | 10         | 11         | 12         | 13         | 14         | 15         |
 | 16         | 17         | 18         | 19         | 20         | 21         | 22         |
 | 23         | 24         | 25         | 26         | 27         | 28         | 29         |
@@ -365,5 +365,157 @@ func (this *StockSpanner) Next(price int) int {
  * obj := Constructor();
  * param_1 := obj.Next(price);
  */
+```
+
+
+
+## 10.8｜[2034. 股票价格波动](https://leetcode.cn/problems/stock-price-fluctuation/description/?envType=daily-question&envId=2023-10-08)
+
+**思路**
+
+队列+哈希表，超时了。。。
+
+可以改成两个优先队列。
+
+**代码实现**
+
+```go
+type StockPrice struct {
+    latestStamp int // 最大的时间戳
+    price map[int]int // 存储时间戳对应的最新价格
+    priQue [][2]int // 0 -> 时间戳， 1 -> 价格
+}
+
+
+func Constructor() StockPrice {
+    price := make(map[int]int)
+    priQue := make([][2]int, 0)
+    return StockPrice{-1, price, priQue}
+}
+
+
+func (this *StockPrice) Update(timestamp int, price int)  {
+    this.price[timestamp] = price
+
+    if this.latestStamp < timestamp{
+        // 更新最新的时间戳
+        this.latestStamp = timestamp
+    }
+
+    // 维护一个尾小头大的队列
+    var i = len(this.priQue) - 1
+    for ; i >= 0; i--{
+        if this.priQue[i][1] > price{
+            // 获取第一个比它大的元素的下标
+            break
+        }
+    }
+
+    if i == -1{
+        if len(this.priQue) != 0{
+            temp := this.priQue
+            defer func(){  
+                this.priQue = append(this.priQue, temp...)
+            }()
+        }
+        this.priQue = [][2]int{[2]int{timestamp, price}}
+        return
+    }
+
+    tail := append([][2]int{}, this.priQue[i+1:]...)
+    this.priQue = append(this.priQue[:i+1], [2]int{timestamp, price})
+    this.priQue = append(this.priQue, tail...)
+    return
+}
+
+
+func (this *StockPrice) Current() int {
+    return this.price[this.latestStamp]
+}
+
+
+func (this *StockPrice) Maximum() int {
+    maxStamp := this.priQue[0][0]
+    maxPrice := this.priQue[0][1]
+    for this.price[maxStamp] != maxPrice{
+        this.priQue = this.priQue[1:]
+        maxStamp = this.priQue[0][0]
+        maxPrice = this.priQue[0][1]
+    }
+    return this.priQue[0][1]
+}
+
+
+func (this *StockPrice) Minimum() int {
+    minStamp := this.priQue[len(this.priQue) - 1][0]
+    minPrice := this.priQue[len(this.priQue) - 1][1]
+    for this.price[minStamp] != minPrice{
+        this.priQue = this.priQue[:len(this.priQue) - 1]
+        minStamp = this.priQue[len(this.priQue) - 1][0]
+        minPrice = this.priQue[len(this.priQue) - 1][1]
+    }
+    return this.priQue[len(this.priQue) - 1][1]
+}
+
+
+/**
+ * Your StockPrice object will be instantiated and called as such:
+ * obj := Constructor();
+ * obj.Update(timestamp,price);
+ * param_2 := obj.Current();
+ * param_3 := obj.Maximum();
+ * param_4 := obj.Minimum();
+ */
+```
+
+```go
+type StockPrice struct {
+    maxPrice, minPrice hp
+    timePriceMap       map[int]int
+    maxTimestamp       int
+}
+
+func Constructor() StockPrice {
+    return StockPrice{timePriceMap: map[int]int{}}
+}
+
+func (sp *StockPrice) Update(timestamp, price int) {
+    heap.Push(&sp.maxPrice, pair{-price, timestamp})
+    heap.Push(&sp.minPrice, pair{price, timestamp})
+    sp.timePriceMap[timestamp] = price
+    if timestamp > sp.maxTimestamp {
+        sp.maxTimestamp = timestamp
+    }
+}
+
+func (sp *StockPrice) Current() int {
+    return sp.timePriceMap[sp.maxTimestamp]
+}
+
+func (sp *StockPrice) Maximum() int {
+    for {
+        if p := sp.maxPrice[0]; -p.price == sp.timePriceMap[p.timestamp] {
+            return -p.price
+        }
+        heap.Pop(&sp.maxPrice)
+    }
+}
+
+func (sp *StockPrice) Minimum() int {
+    for {
+        if p := sp.minPrice[0]; p.price == sp.timePriceMap[p.timestamp] {
+            return p.price
+        }
+        heap.Pop(&sp.minPrice)
+    }
+}
+
+type pair struct{ price, timestamp int }
+type hp []pair
+func (h hp) Len() int            { return len(h) }
+func (h hp) Less(i, j int) bool  { return h[i].price < h[j].price }
+func (h hp) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }
+func (h *hp) Push(v interface{}) { *h = append(*h, v.(pair)) }
+func (h *hp) Pop() interface{}   { a := *h; v := a[len(a)-1]; *h = a[:len(a)-1]; return v }
 ```
 
