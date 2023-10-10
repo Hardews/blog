@@ -1,15 +1,11 @@
 ---
 slug: mysql-concept-study
-title: MySQL 概念梳理
-authors: [hardews]
-tags: [2023, MySQL, 概念, 八股, 持续更新中]
+sidebar_position: 2
 ---
 
 
 
 # MySQL 概念整理
-
-## 说在前头
 
 整理 MySQL 的笔记，也许不仅仅包括概念。
 

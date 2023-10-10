@@ -28,6 +28,10 @@ const config = {
       '@docusaurus/preset-classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
+        docs: {
+          path: 'docs',
+          sidebarPath: require.resolve('./sidebars.js'),
+        },
         blog: {
           path: "./blog",
           showReadingTime: true,
