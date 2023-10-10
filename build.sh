@@ -1,14 +1,14 @@
 # 服务名，也是 docker 镜像 / 容器名字
 SERVER_NAME='blog'
 # 构建的路径：环境变量基础路径 + 服务名
-SOURCE_PATH= '/opt/blog'
+SOURCE_PATH='/opt/blog'
 # 容器 id
 CID=$(docker ps | grep "$SERVER_NAME" | awk '{print $1}')
 # 镜像 id
 IID=$(docker images | grep "$SERVER_NAME" | awk '{print $3}')
 # 构建 docker 镜像
 docker build -t $SERVER_NAME .
-cd
+cd $SOURCE_PATH
 # 先构建，再更新。
 # 如果有该容器
 if [ -n "$CID" ]; then
