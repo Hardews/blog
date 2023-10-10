@@ -80,11 +80,6 @@ const config = {
         src: 'img/favicon.png',
         },
         items: [
-	  {
-            href: 'https://hardews.cn/series',
-            label: 'Series',
-            position: 'right'
-          },
           {
             href: 'https://hardews.cn/archive',
             label: 'Archive',
