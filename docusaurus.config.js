@@ -64,10 +64,15 @@ const config = {
       navbar: {
         title: '牛肉拌面的博客',
         logo: {
-        alt: '博客 Logo',
-        src: 'img/favicon.png',
+          alt: '博客 Logo',
+          src: 'img/favicon.png',
         },
         items: [
+          {
+            href: 'https://hardews.cn/docs/introduction',
+            label: 'Docs',
+            position: 'left'
+          },
           {
             href: 'https://hardews.cn/archive',
             label: 'Archive',
