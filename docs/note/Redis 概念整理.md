@@ -1,11 +1,11 @@
 ---
 slug: redis-concept-study
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 
 
-# Redis 概念整理
+# Redis 概念梳理
 
 题目部分来自 [题库｜编程满天星 (itmtx.cn)](https://itmtx.cn/question)，本文为归纳整理，方便记忆。
 

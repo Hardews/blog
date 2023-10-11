@@ -1,11 +1,11 @@
 ---
 slug: mysql-concept-study
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 
 
-# MySQL 概念整理
+# MySQL 概念梳理
 
 整理 MySQL 的笔记，也许不仅仅包括概念。
 

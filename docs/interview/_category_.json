@@ -1,8 +1,8 @@
 {
-  "label": "八股",
-  "position": 4,
+  "label": "常见面试题",
+  "position": 0,
   "link": {
     "type": "generated-index",
-    "description": "一些八股和面经整理"
+    "description": "常见的面试题汇总"
   }
 }
