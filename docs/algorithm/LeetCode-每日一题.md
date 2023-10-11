@@ -584,3 +584,66 @@ func sumDistance(nums []int, s string, d int) int {
 }
 ```
 
+
+
+## 10.11｜[2512. 奖励最顶尖的 K 名学生](https://leetcode.cn/problems/reward-top-k-students/)
+
+**思路**
+
+1. 首先使用哈希表记录每个词汇的分数
+2. 使用一个二维数组，二维长度为 student 的长度，一维长度为 2，其中 0 为 student_id，1 为分数。
+3. 遍历 student_id，每次遍历：
+   1. 以空格拆分 student_id 对应的 report string。
+   2. 每个词汇判断是否在哈希表中存在，存在则直接加上分数。
+   3. 直至遍历结束。
+4. 使用选择排序选举出 k 个最大的学生。需要注意分数相等的情况。
+
+**代码实现**
+
+```go
+func topStudents(positive_feedback []string, negative_feedback []string, report []string, student_id []int, k int) []int {
+    var scoreMap = make(map[string]int)
+    for i := range positive_feedback{
+        scoreMap[positive_feedback[i]] = 3
+    }
+    for i := range negative_feedback{
+        scoreMap[negative_feedback[i]] = -1
+    }
+    // 每个学生的分数
+    var score = make([][2]int, len(student_id)) 
+    for i := range student_id{
+        r := report[i] // 评语
+        score[i][0] = student_id[i]
+        rArr := strings.Split(r, " ")
+        for j := range rArr{
+            if s, ok := scoreMap[rArr[j]]; ok{
+                score[i][1] += s
+            }
+        }
+    }
+
+    // 接下来是对它们进行选择排序
+    // 每次选一个最大的，直到选到 k 个
+    return selectionSort(score, k)
+}
+
+func selectionSort(arr [][2]int, k int) []int{
+    var ans []int
+    for i := 0; i < k; i++{
+        var max = i
+        for j := i + 1; j < len(arr); j++{
+            if arr[max][1] == arr[j][1] && arr[max][0] > arr[j][0]{
+                max = j
+                continue
+            }
+            if arr[max][1] < arr[j][1]{
+                max = j
+            }
+        }
+        ans = append(ans, arr[max][0])
+        arr[i], arr[max] = arr[max], arr[i]
+    }
+    return ans
+}
+```
+
