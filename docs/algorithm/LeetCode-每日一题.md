@@ -647,3 +647,31 @@ func selectionSort(arr [][2]int, k int) []int{
 }
 ```
 
+
+
+## 10.12｜[2562. 找出数组的串联值](https://leetcode.cn/problems/find-the-array-concatenation-value/description/)
+
+**思路**
+
+没啥好说的，重拳出击，题目让干啥就干啥。
+
+**代码实现**
+
+```go
+func findTheArrayConcVal(nums []int) int64 {
+    var left, right = 0, len(nums) - 1
+    var ans int
+    for left < right{
+        ans += nums[right]
+        bit := len(strconv.Itoa(nums[right]))
+        ans += nums[left] * int(math.Pow(10, float64(bit)))
+
+        left++
+        right--
+    }
+    if len(nums) % 2 == 1{
+        ans += nums[len(nums) / 2]
+    }
+    return int64(ans)
+}
+```
