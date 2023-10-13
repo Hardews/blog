@@ -675,3 +675,81 @@ func findTheArrayConcVal(nums []int) int64 {
     return int64(ans)
 }
 ```
+
+
+
+## 10.13｜[1488. 避免洪水泛滥](https://leetcode.cn/problems/avoid-flood-in-the-city/description/)
+
+**思路**
+
+使用 贪心 + 哈希表 + 二分查找。
+
+- 当数组中的元素为 0 时，为晴天。我们使用一个数组 can 来记录晴天的下标。
+- 当数组中的元素不为 0 时，为雨天。我们使用哈希表 rainMap 来记录第一次出现这个水池的下标。
+
+我们遍历 rains 数组，当第二次遇到水池时，证明需要抽干水。
+
+抽干水则需要满足条件：
+
+- 如果 can 数组为空，那么没有可以抽水的晴天，返回 nil。
+- 如果第一次出现的下标比 can 数组中最后一个元素大，证明没有晴天可供抽干水，直接返回 nil。
+- 在离水池第一次出现的最近一个晴天抽干水，也就是找到离第一次出现时下标最近的晴天下标。我们可以使用二分查找。
+- 我们每次处理完不为 0 的下标时，都需要更新当前哈希表的下标。
+
+
+
+**代码实现**
+
+```go
+func avoidFlood(rains []int) []int {
+    var rainMap = make(map[int]int)
+    var can []int
+    var ans = make([]int, len(rains))
+    for i, isRain := range rains{
+        ans[i] = -1
+        if isRain == 0{
+            can = append(can, i)
+            continue
+        }
+        if idx, ok := rainMap[isRain]; ok{
+            if len(can) == 0 {
+                return nil
+            }
+            if idx > can[len(can) - 1]{
+                // 抽不了，寄
+                return nil
+            }
+
+            // 二分找到最近的那个晴天
+            sunny := searchCan(can, idx)
+
+            ans[can[sunny]] = isRain
+            can = append(can[:sunny], can[sunny+1:]...)
+        }
+        rainMap[isRain] = i
+    }
+    // 空的也抽
+    for len(can) != 0{
+        ans[can[0]] = 1
+        can = can[1:]
+    }
+    return ans
+}
+
+func searchCan(can []int, idx int) int{
+    var left, right = 0, len(can) - 1
+    var mid = (left + right) / 2
+    
+    for left < right{
+        if idx > can[mid]{
+            left = mid + 1
+        }else{
+            return mid
+        }
+        mid = (left + right) / 2
+    }
+
+    return left
+}
+```
+
