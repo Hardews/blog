@@ -9,13 +9,13 @@ sidebar_position: 1
 
 **十月**
 
-| 一         | 二          | 三         | 四         | 五         | 六         | 七         |
-| ---------- | ----------- | ---------- | ---------- | ---------- | ---------- | ---------- |
-|            |             |            |            |            |            | **[10.1]** |
-| **[10.2]** | **[10.3]**  | **[10.4]** | **[10.5]** | **[10.6]** | **[10.7]** | **[10.8]** |
-| **[10.9]** | **[10.10]** | 11         | 12         | 13         | 14         | 15         |
-| 16         | 17          | 18         | 19         | 20         | 21         | 22         |
-| 23         | 24          | 25         | 26         | 27         | 28         | 29         |
+| 一         | 二          | 三          | 四          | 五          | 六          | 七          |
+| ---------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
+|            |             |             |             |             |             | **[10.1]**  |
+| **[10.2]** | **[10.3]**  | **[10.4]**  | **[10.5]**  | **[10.6]**  | **[10.7]**  | **[10.8]**  |
+| **[10.9]** | **[10.10]** | **[10.11]** | **[10.12]** | **[10.13]** | **[10.14]** | **[10.15]** |
+| 16         | 17          | 18          | 19          | 20          | 21          | 22          |
+| 23         | 24          | 25          | 26          | 27          | 28          | 29          |
 
 <!--truncate-->
 
@@ -755,7 +755,7 @@ func searchCan(can []int, idx int) int{
 
 
 
-## 10.14
+## 10.14｜[136. 只出现一次的数字 ](https://leetcode.cn/problems/single-number/description/?envType=daily-question&envId=2023-10-14)
 
 **思路**
 
@@ -779,6 +779,51 @@ func singleNumber(nums []int) int {
         ans ^= num
     }
     return ans
+}
+```
+
+
+
+## 10.15｜[137. 只出现一次的数字 II ](https://leetcode.cn/problems/single-number-ii/description/)
+
+**思路**
+
+哈希表法，想不出来其他的。
+
+**看了题解后**
+
+(恍然大悟)，依次确认答案的二进制位。看[官解](https://leetcode.cn/problems/single-number-ii/solutions/746993/zhi-chu-xian-yi-ci-de-shu-zi-ii-by-leetc-23t6/)
+
+**代码实现**
+
+```go
+func singleNumber(nums []int) int {
+    var m = make(map[int]int)
+    for _, num := range nums{
+        m[num]++
+    }
+    for key, val := range m{
+        if val == 1{
+            return key
+        }
+    }
+    return -1
+}
+```
+
+```go
+func singleNumber(nums []int) int {
+    var ans int32
+    for i := 0; i < 32; i++{
+        var total int32
+        for _, num := range nums{
+            total += int32(num)  >> i & 1
+        }
+        if total % 3 > 0{
+            ans |= 1 << i
+        }
+    }
+    return int(ans)
 }
 ```
 
