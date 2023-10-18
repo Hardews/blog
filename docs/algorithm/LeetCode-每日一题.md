@@ -14,7 +14,7 @@ sidebar_position: 1
 |             |             |             |             |             |             | **[10.1]**  |
 | **[10.2]**  | **[10.3]**  | **[10.4]**  | **[10.5]**  | **[10.6]**  | **[10.7]**  | **[10.8]**  |
 | **[10.9]**  | **[10.10]** | **[10.11]** | **[10.12]** | **[10.13]** | **[10.14]** | **[10.15]** |
-| **[10.16]** | 17          | 18          | 19          | 20          | 21          | 22          |
+| **[10.16]** | **[10.17]** | **[10.18]** | 19          | 20          | 21          | 22          |
 | 23          | 24          | 25          | 26          | 27          | 28          | 29          |
 
 <!--truncate-->
@@ -850,6 +850,70 @@ func singleNumber(nums []int) []int {
          }
      }
      return ans
+}
+```
+
+
+
+## 10.17｜[2652. 倍数求和](https://leetcode.cn/problems/sum-multiples/description/)
+
+```go
+func sumOfMultiples(n int) int {
+    var ans int
+    for i := 3; i <= n; i++{
+        if i % 3 == 0 || i % 5 == 0 || i % 7 == 0{
+            ans += i
+        }
+    }
+    return ans
+}
+```
+
+
+
+## 10.18｜[2530. 执行 K 次操作后的最大分数](https://leetcode.cn/problems/maximal-score-after-applying-k-operations/?envType=daily-question&envId=2023-10-18)
+
+**思路**
+
+维护一个大根堆即可。唯一需要注意的就是向上取整。
+
+**代码实现**
+
+```go
+func maxKelements(nums []int, k int) int64 {
+    for i := len(nums) / 2; i >= 0; i--{
+        // 创建大根堆
+        heapify(nums, i, len(nums))
+    }
+    var ans int
+    for i := 0; i < k; i++{
+        ans += nums[0]
+        nums[0] = (nums[0] + 2) / 3 // 向上取整
+        heapify(nums, 0, len(nums))
+    }
+    return int64(ans)
+}
+
+func heapify(target []int, start, end int) {
+    var latest = start
+    var left, right = 2 * start + 1, 2 * start + 2
+
+    if left < end && target[left] > target[latest]{
+        latest = left
+    }
+
+    if right < end && target[right] > target[latest]{
+        latest = right
+    }
+
+    if latest != start{
+        swap(target, start, latest)
+        heapify(target, latest, end)
+    }
+}
+
+func swap(target []int, p,q int){
+    target[p], target[q] = target[q], target[p]
 }
 ```
 
