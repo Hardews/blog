@@ -14,7 +14,7 @@ sidebar_position: 1
 |             |             |             |             |             |             | **[10.1]**  |
 | **[10.2]**  | **[10.3]**  | **[10.4]**  | **[10.5]**  | **[10.6]**  | **[10.7]**  | **[10.8]**  |
 | **[10.9]**  | **[10.10]** | **[10.11]** | **[10.12]** | **[10.13]** | **[10.14]** | **[10.15]** |
-| **[10.16]** | **[10.17]** | **[10.18]** | 19          | 20          | 21          | 22          |
+| **[10.16]** | **[10.17]** | **[10.18]** | **[10.19]** | **[10.20]** | 21          | 22          |
 | 23          | 24          | 25          | 26          | 27          | 28          | 29          |
 
 <!--truncate-->
@@ -914,6 +914,59 @@ func heapify(target []int, start, end int) {
 
 func swap(target []int, p,q int){
     target[p], target[q] = target[q], target[p]
+}
+```
+
+
+
+## 10.19｜[1726. 同积元组](https://leetcode.cn/problems/tuple-with-same-product/description/?envType=daily-question&envId=2023-10-19)
+
+**思路**
+
+使用哈希表记录相同的积，然后使用公式计算出有多少个同积元组。
+
+**代码实现**
+
+```go
+func tupleSameProduct(nums []int) int {
+    var record = make(map[int]int)
+    for i := 0; i < len(nums) - 1; i++{
+        for j := i + 1; j < len(nums); j++{
+            record[nums[i] * nums[j]]++
+        }
+    }
+    var ans int
+    for _, val := range record{
+        if val > 1{
+            ans += (val * (val - 1)) / 2 * 8 
+        }
+    }
+    return ans
+}
+```
+
+
+
+
+
+## 10.20｜[2525. 根据规则将箱子分类 - 力扣](https://leetcode.cn/problems/categorize-box-according-to-criteria/)
+
+```go
+func categorizeBox(length int, width int, height int, mass int) string {
+    var isBulky = length >= 1e4 || 
+    width >= 1e4 || height >= 1e4 || length * width * height >= 1e9
+    var isHeavy = mass >= 100
+
+    if isBulky && isHeavy{
+        return "Both"
+    }
+    if isBulky{
+        return "Bulky"
+    }
+    if isHeavy{
+        return "Heavy"
+    }
+    return "Neither"
 }
 ```
 
