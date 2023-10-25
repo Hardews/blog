@@ -14,12 +14,10 @@ const config = {
     locales: ['zh-Hans'],
   },
   scripts: [
-
 	  {
 		  src: 'https://hm.baidu.com/hm.js?d1b90f0beea87f33a50c8f8c785b8fc7',
 		  async: true
 	  }
-
   ],
   presets: [
     [
@@ -70,8 +68,8 @@ const config = {
         items: [
           {
             href: 'https://hardews.cn/docs/introduction',
-            label: 'Docs',
-            position: 'left'
+            label: '文档',
+            position: 'right'
           },
           {
             href: 'https://hardews.cn/archive',
@@ -94,6 +92,7 @@ const config = {
         style: 'dark',
         links: [
           {
+            title: '备案',
             items: [
               {
                 label: '桂ICP备2022010425号-1',
@@ -101,14 +100,21 @@ const config = {
               },
             ],
           },
+          {
+            title: '友链',
+            items: [
+              {
+                label: '坤坤的博客',
+                href: 'https://hexo.cliao.site/',
+              },
+              {
+                label: '诚哥的博客',
+                href: 'https://www.madfrey.top/',
+              },
+            ]
+          }
         ]
       },
-      stylesheets: [
-        {
-          href: 'katex/katex.min.css',
-          type: 'text/css',
-        },
-      ],
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
