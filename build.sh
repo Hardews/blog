@@ -19,3 +19,6 @@ fi
 # 运行 docker 容器
 docker run --name $SERVER_NAME -d -p 3000:80 $SERVER_NAME
 echo "$SERVER_NAME 运行成功"
+# 删除 <none> 容器，节省空间
+docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
+
