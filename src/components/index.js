@@ -4,32 +4,36 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Contact',
+    Svg: require('@site/static/img/home1.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        🙌: <a href='https://github.com/Hardews'>Github</a>
+        <br></br>
+        📫: hardews@qq.com
+        <br></br>
+        And my Leetcode page: <a href='https://leetcode.cn/u/niu-rou-ban-mian-t/'>click</a>
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Currently',
+    Svg: require('@site/static/img/home2.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        <code>Golang</code> base knowledge review.
+        <br></br>
+        <code>LeetCode</code> daily.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Share',
+    Svg: require('@site/static/img/home3.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        More about back-end and interesting knowledge.
+        Also share something about life.
       </>
     ),
   },

@@ -3,7 +3,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '牛肉拌面的博客',
+  title: 'Hardews\'s blog',
+  tagline: '心无增减，得失随缘',
   favicon: "img/favicon.png",
 
   url: 'https://hardews.cn',
@@ -33,7 +34,7 @@ const config = {
           path: "./blog",
           showReadingTime: true,
           blogSidebarTitle: "最近的文章",
-          routeBasePath:"/",
+          routeBasePath:"/blog",
 	        sortPosts: "descending",
           postsPerPage: 7,
           archiveBasePath: "/archive",
@@ -59,30 +60,39 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      image: 'img/background.jpg',
       navbar: {
-        title: '牛肉拌面的博客',
+        title: 'Homepage',
         logo: {
-          alt: '博客 Logo',
-          src: 'img/favicon.png',
+          style: {
+            borderRadius: '50%',
+          },
+          alt: '头像',
+          src: 'img/wechat.jpg',
         },
         items: [
           {
-            href: 'https://hardews.cn/docs/introduction',
-            label: '文档',
-            position: 'right'
+            href: '/blog',
+            label: '博客',
+            position: 'left'
           },
           {
-            href: 'https://hardews.cn/archive',
-            label: 'Archive',
+            href: '/docs/intro',
+            label: '文档',
+            position: 'left'
+          },
+          {
+            href: '/blog/archive',
+            label: '归档',
             position: 'right'
           },
 	        {
-            href: 'https://hardews.cn/about',
+            href: '/blog/about',
             label: 'Introduction',
             position: 'right'
           },
           {
-            href: 'https://github.com/hardews',
+            href: 'https://github.com/hardews/blog',
             label: 'GitHub',
             position: 'right',
           },
