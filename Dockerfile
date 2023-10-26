@@ -9,7 +9,9 @@ COPY . /home/node/app/
 FROM base as development
 WORKDIR /home/node/app
 RUN npm install
-RUN npm install --save remark-math@3 rehype-katex@5 hast-util-is-element@1.1.0
+RUN npm install @mui/material
+RUN npm install @emotion/react
+RUN npm install @emotion/styled
 USER node
 EXPOSE 3000
 CMD ["npm", "start"]
