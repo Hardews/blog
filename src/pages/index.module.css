@@ -4,17 +4,26 @@
  */
 
 .heroBanner {
-  background-color: #ffffff;
+  background: none;
   padding: 4rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
+.index{
+  background: url('../img/mountain.png');
+  background-size: 100% 100%;
+}
+
 @media screen and (max-width: 996px) {
   .heroBanner {
-    background-color: #ffffff;
+    background: none;
     padding: 2rem;
+  }
+  .index{
+    background-attachment: fixed;
+    background-size: cover;
   }
 }
 
@@ -24,5 +33,6 @@
   justify-content: center;
   margin: 30px 0 0;
 }
+
 
 

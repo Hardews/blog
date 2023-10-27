@@ -86,7 +86,7 @@ sidebar_position: 1
 
 如下图：
 
-![架构图](../img/MySQL_架构图.png)
+![架构图](./img/MySQL_架构图.png)
 
 大致可以分为 Server 层和存储引擎层两部分。
 
@@ -119,7 +119,7 @@ Server 层包括连接器、查询缓存、分析器、优化器、执行器等�
 
 ##### 分析器
 
-![分析器](../img/MySQL_分析器.png)
+![分析器](./img/MySQL_分析器.png)
 
 结合上图，分析器主要是两个功能：
 
@@ -242,7 +242,7 @@ redo log 主要分为两部分：
 
 mysql 执行 DML（数据操纵语言） 语句时，会先将记录写入 `redo log buffer`，后续根据参数在某个时间点将记录写到 `redo log file` 中。这种 **预写日志（先写日志，再写硬盘）** 的技术就是 `WAL(Write-Ahead Logging)`。
 
-![redo log](../img/MySQL_redolog.png)
+![redo log](./img/MySQL_redolog.png)
 
 
 

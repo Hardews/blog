@@ -6,8 +6,6 @@ sidebar_position: 2
 
 
 
-
-
 # Shell 变量
 
 本节是 Shell 变量相关的知识点
@@ -342,5 +340,134 @@ echo ${len_test:1:2} # output: bc
 echo ${len_test:1:3} # output: bcd
 
 echo `expr index "$len_test" ac` # 这里是找 a 或者 c 第一次出现的位置
+```
+
+
+
+## Shell 数组
+
+bash 支持一维数组（不支持多维数组），并且没有限定数组的大小。
+
+数组元素的下标从 0 开始编号，下标可以是整数或算数式，值应该大于等于 0.
+
+### 定义数组
+
+在 Shell 中，用括号表示数组，数组元素用**空格**符号分隔开。定义数组的一般形式为：
+
+```shell
+array_name=(val1 val2 val3)
+# or
+array_name=(
+val1
+val2
+val3
+)
+```
+
+数组的下标没有限制，也可以单独定义数组的各个分量：
+
+```shell
+array_name[0]=val1
+array_name[1]=val2
+```
+
+### 读取数组中的元素
+
+与其他变量一致
+
+```shell
+${array_name[index]}
+```
+
+使用 @ 可以获取数组中的所有元素
+
+```shell
+${array_name[@]}
+```
+
+### 获取数组的长度
+
+与获取字符串的长度类似
+
+```shell
+# 数组元素的个数
+length=${#array_name[@]}
+# or
+length=${#array_name[*]}
+# 获取单个元素的长度
+length=${#array_name[index]}
+```
+
+
+
+**完整 demo**
+
+```shell
+#!/bin/bash
+# var3.sh
+arr=(0 1 2 3)
+echo "arr fisrt elem is" ${arr[0]}
+
+for i in ${arr[@]}; do
+	echo ${i}
+done
+
+echo "arr len is" ${#arr[@]}
+```
+
+输出：
+
+```sh
+arr fisrt elem is 0
+0
+1
+2
+3
+arr len is 4
+```
+
+
+
+## Shell 注释
+
+### 单行注释
+
+在开头加个 # 就是注释，会被解释器忽略。
+
+### 多行注释
+
+#### 封装成一个函数
+
+可以把大段的代码封装成一个函数，没有地方用到这个函数，这块代码就不会执行。起到了注释一样的效果。
+
+#### 使用 Here 文档
+
+格式为 `: + <<'EOF' + EOF`
+
+例如：
+
+```shell
+:<<EOF
+煮熟
+注释
+注释
+EOF
+```
+
+EOF 也可以替换成其他字符，比如 COMMENT。
+
+
+
+#### 直接用 : 号
+
+格式为 `: + 空格 + 单引号`
+
+例如：
+
+```shell
+:'
+多行煮熟
+多行注释
+'
 ```
 

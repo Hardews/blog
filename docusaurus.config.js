@@ -20,6 +20,30 @@ const config = {
 		  async: true
 	  }
   ],
+
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'algorithm',
+        // 算法
+        path: './algorithm',
+        routeBasePath:"/algorithm",
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'interview',
+        // 面试题
+        path: './interview',
+        routeBasePath:"/interview",
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+  ],
+
   presets: [
     [
       '@docusaurus/preset-classic',
@@ -27,7 +51,7 @@ const config = {
       ({
         docs: {
           path: './docs',
-          routeBasePath:"/docs",
+          routeBasePath:"/note",
           sidebarPath: require.resolve('./sidebars.js'),
         },
         blog: {
@@ -77,26 +101,51 @@ const config = {
             position: 'left'
           },
           {
-            href: '/docs/intro',
-            label: '文档',
-            position: 'left'
+            type: 'dropdown',
+            label: '更多',
+            position: 'left',
+            items: [
+              {
+                label: '算法',
+                href: '/algorithm/intro'
+              },
+              {
+                label: '面试题',
+                href: '/interview/intro'
+              },
+              {
+                label: '学习笔记',
+                href: '/note/intro'
+              },
+              {
+                label: '博客归档',
+                href: '/blog/archive'
+              },
+            ]
           },
           {
-            href: '/blog/archive',
-            label: '归档',
-            position: 'right'
+            type: 'dropdown',
+            label: '友链',
+            position: 'left',
+            items: [
+              {
+                label: '坤坤',
+                href: 'https://hexo.cliao.site/'
+              },
+              {
+                label: '诚哥',
+                href: 'https://www.madfrey.top/'
+              },
+            ]
           },
-	        {
-            href: '/blog/about',
-            label: 'Introduction',
-            position: 'right'
-          },
+          
           {
             href: 'https://github.com/hardews/blog',
             label: 'GitHub',
             position: 'right',
           },
         ],
+        
       },
       footer: {
         style: 'dark',
@@ -110,19 +159,6 @@ const config = {
               },
             ],
           },
-          {
-            title: '友链',
-            items: [
-              {
-                label: '坤坤的博客',
-                href: 'https://hexo.cliao.site/',
-              },
-              {
-                label: '诚哥的博客',
-                href: 'https://www.madfrey.top/',
-              },
-            ]
-          }
         ]
       },
       prism: {
