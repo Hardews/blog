@@ -1,5 +1,5 @@
 ---
-slug: shell-variable
+slug: shell-echo
 title: Shell echo
 sidebar_position: 6
 ---
