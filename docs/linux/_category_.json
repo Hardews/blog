@@ -1,8 +1,8 @@
 {
-  "label": "Linux 命令",
+  "label": "Linux 学习笔记",
   "position": 4,
   "link": {
     "type": "generated-index",
-    "description": "Linux 各种命令的学习笔记"
+    "description": "Linux 各种学习笔记"
   }
 }
