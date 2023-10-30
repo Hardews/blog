@@ -1,6 +1,7 @@
 ---
 slug: upgrade
-sideba_position:2
+title: Linux 命令进阶
+sidebar_position: 2
 ---
 
 # Linux 命令进阶
