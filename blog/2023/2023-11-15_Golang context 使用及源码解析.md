@@ -11,6 +11,8 @@ tag: [2023, Golang, 并发控制, context]
 
 context 是 go 语言中并发控制的一大利器，在复杂的 goroutine 场景中，context 可以起到很大的作用。
 
+<!--truncate-->
+
 ## 应用场景
 
 常见的应用例子如下：
