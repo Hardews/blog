@@ -68,7 +68,7 @@ social:
 other:
     - name: "文档"
       icon: "/images/icon-link.png"
-      url: https://hardews.cn/docs
+      url: https://hardews.cn/docs/intro
 
 reward: # 赞赏
   enable: true
